@@ -1,3 +1,5 @@
+alias PING="echo PONG"
+
 alias ..="cd .."
 alias ...="cd ..."
 alias c="clear"
@@ -23,8 +25,12 @@ alias venv=". venv/bin/activate"
 TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 
 alias lg="lazygit"
+
+# Git bare repo for dotfiles.
 alias config="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
-alias configls="config log --pretty=format: --name-only --diff-filter=A | sort -" #config ls-tree --full-tree -r HEAD --name-only; 
+alias configls="config ls-tree --full-tree -r HEAD --name-only"  # Do not use this => config log --pretty=format: --name-only --diff-filter=A | sort -;  
+alias configtree="configls | tree -C --fromfile . | ${PAGER:-less};"  # View tracked files in a tree.
+alias configopen='nvim $(configls | fzf | sed "s,^,$(config rev-parse --show-toplevel)/,")'  # Open tracked file in nvim.
 
 # alias vim="nvim"
 alias notes="calcurse"	# note and appointment taking ncurses based app.
@@ -77,7 +83,6 @@ alias check_internet="ping 8.8.8.8"
 alias hdmileft="xrandr --output HDMI-1-0 --left-of eDP-1 --auto"
 alias hdmiright="xrandr --output HDMI-1-0 --right-of eDP-1 --auto"
 alias hdmioff="xrandr --output HDMI-1-0 --off"
-alias mycheck="echo It fucking works!"
 
 alias xsc="xclip -sel clip" # To copy piped outputs like $ pwd | xsc 
 

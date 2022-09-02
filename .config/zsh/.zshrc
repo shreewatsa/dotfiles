@@ -105,7 +105,7 @@ bindkey -s '^z' 'zi^M'
 bindkey -s '^s' 'ncdu^M'
 
 source $HOME/.config/commons/aliases.sh
-PATH="$DOTS/scripts:$DOTS/scripts/dmenu:$PATH"
+PATH="$HOME/.config/commons/scripts:$HOME/.config/commons/scripts/dmenu:$PATH"
 export PATH
 
 # Zoxide related config

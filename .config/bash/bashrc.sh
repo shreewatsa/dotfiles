@@ -147,6 +147,7 @@ ex ()
 source $HOME/.config/commons/aliases.sh
 
 PATH="$HOME/.config/commons/scripts:$PATH"
+PATH="$HOME/.config/commons/scripts:$HOME/.config/commons/scripts/dmenu:$PATH"
 export PATH
 
 export ZDOTDIR=$HOME/.config/zsh

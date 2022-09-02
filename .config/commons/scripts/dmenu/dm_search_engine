@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+DMENU="dmenu -i -l 20 -p"
+DMBROWSER="google-chrome-stable"
+
+# Search engine config 
+declare -A websearch
+# Search Engines 
+websearch[duckduckgo]="https://duckduckgo.com/?q="
+websearch[google]="https://www.google.com/search?q="
+# Information/News
+websearch[wikipedia]="https://en.wikipedia.org/w/index.php?search="
+websearch[wiktionary]="https://en.wiktionary.org/w/index.php?search="
+websearch[googlemaps]="https://www.google.com/maps/place/"
+# Social Media
+websearch[reddit]="https://www.reddit.com/search/?q="
+websearch[youtube]="https://www.youtube.com/results?search_query="
+# Online Shopping
+websearch[amazon]="https://www.amazon.com/s?k="
+websearch[daraz]="https://www.daraz.com.np/catalog/?q="
+# Linux
+websearch[archaur]="https://aur.archlinux.org/packages/?O=0&K="
+websearch[archpkg]="https://archlinux.org/packages/?sort=&q="
+websearch[archwiki]="https://wiki.archlinux.org/index.php?search="
+# Development
+websearch[github]="https://github.com/search?q="
+websearch[gitlab]="https://gitlab.com/search?search="
+websearch[googleOpenSource]="https://opensource.google/projects/search?q="
+websearch[stackoverflow]="https://stackoverflow.com/search?q="
+# Etc
+
+main() {
+  engine=$(printf '%s\n' "${!websearch[@]}" | sort | ${DMENU} 'Choose search engine:' "$@") || exit 1
+  url="${websearch["${engine}"]}"
+
+  # query=$(echo "$engine" | ${DMENU} 'Enter search query:')
+  query=$( echo | dmenu -p "Type to search in $engine :")
+
+  query="$(echo -n "${query}" | jq -s -R -r @uri)"
+  ${DMBROWSER} "${url}${query}"
+}
+main "$@"
+

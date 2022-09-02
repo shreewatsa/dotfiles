@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#!/usr/bin/env bash
+SCRIPT_FOLDER="$DOTFILES/scripts"
+SCRIPT_FILE="$SCRIPT_FOLDER/$1"
+
+echo $SCRIPT_FILE
+
+is_replace="y"
+if [[ -f $SCRIPT_FILE ]]; then
+	echo "File already exists"
+  read -p "Replace the existing file ? (y/n) : " is_replace
+  if [[ $is_replace =~ ^[yY]$ ]]; then
+    echo > $SCRIPT_FILE
+  else
+    exit
+  fi
+fi
+
+echo '#!/bin/bash' > $SCRIPT_FILE
+echo $(echo 'echo ' $SCRIPT_FILE) >> $SCRIPT_FILE
+
+chmod +x $SCRIPT_FILE
+
+while true; do
+  read -p "Do you want to open the script file ? (y/n) : " yn
+  case $yn in 
+    y ) nvim $SCRIPT_FILE; break;;
+    n ) exit;;
+    * ) echo "Please enter y/n";;
+  esac
+done
+

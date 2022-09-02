@@ -1,0 +1,23 @@
+#!/bin/sh
+
+declare -A websearch
+websearch[bing]="https://www.bing.com/search?q="
+websearch[brave]="https://search.brave.com/search?q="
+websearch[duckduckgo]="https://duckduckgo.com/?q="
+
+
+printf '%s\n' "${!websearch[@]}" 
+
+
+# [ $(echo -e "No\nYes" | dmenu -i -p "$1" ) == "Yes" ] && $2
+choices="laptop\nVGA\nHDMI\nManual Selection"
+chosen=$(echo -e "$choices" | dmenu -i)
+
+case "$chosen" in
+  laptop) xrandr --output LVDS-1 --auto --output VGA-1 --auto --right-of LVDS-1 && polybar_launch ;;
+  VGA) xrandr --output LVDS-1 --auto --output VGA-1 --off && polybar_launch ;;
+  HDMI) xrandr --output LVDS-1 --auto --output VGA-1 --auto --right-of LVDS-1 && polybar_launch ;;
+  "Manual Selection") arandr && polybar_launch ;;
+  mpv) mpv -quiet "$1" 2&>/dev/null & disown ;;
+esac
+

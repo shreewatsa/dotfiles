@@ -1,0 +1,2 @@
+#!/bin/sh
+echo "Public IP is : " $(curl -s ipinfo.io/ip)

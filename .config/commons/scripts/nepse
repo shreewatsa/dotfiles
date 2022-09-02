@@ -1,0 +1,20 @@
+#!/bin/sh
+
+case "$OSTYPE" in
+  linux-gnu) 
+    if which curl > /dev/null; then
+      RES=$(curl -s https://nepsealpha.com/trading-menu/top-stocks/NEPSE | \
+        jq -r '[.price.today_price, .price.percent_change] | join(" ")' \
+      )
+      NEPSE=$(echo $RES | awk '{printf(" NEPSE "); printf("%4.0f ", $1) ; printf("%.1f", $2); printf "%"} ')
+      printf %s "$NEPSE"
+    else
+      ""
+    fi
+  ;;
+  *) 
+    print ""
+  ;;
+esac
+
+

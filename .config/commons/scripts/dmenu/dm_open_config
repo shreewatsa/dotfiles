@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+DMENU="dmenu -i -l 20 -p"
+PDF_VIEWER="zathura"
+DMBROWSER="google-chrome-stable"
+DMTERM="alacritty -e"
+DMEDITOR="${DMTERM} nvim"
+
+declare -a options=(
+"alacritty      - $HOME/.config/alacritty/alacritty.yml"
+"bash           - $HOME/.config/bash/bashrc"
+"i3             - $HOME/.i3/config"
+"nvim           - $HOME/.config/nvim/init.lua"
+"ssh            - $HOME/.ssh/config"
+"tmux           - $HOME/.config/tmux/tmux.conf"
+"zsh            - $HOME/.config/zsh/.zshrc"
+"quit"
+)
+
+choice=$(printf '%s\n' "${options[@]}" | dmenu -i -l 20 -p "Edit config:")
+
+if [[ "$choice" == "quit" ]]; then
+  echo "Program terminated." && exit 1
+elif [ "$choice" ]; then
+  file_path=$(printf '%s\n' "${choice}" | awk '{print $NF}')
+  $DMEDITOR "$file_path" &
+else 
+  echo "Program terminated." && exit 1
+fi
+

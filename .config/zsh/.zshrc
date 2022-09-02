@@ -100,14 +100,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export MANPAGER="nvim +Man!"
-export MANWIDTH=999
-
 bindkey -s '^f' 'ranger^M'
 bindkey -s '^z' 'zi^M'
 bindkey -s '^s' 'ncdu^M'
 
-source $HOME/Documents/dotfiles/commons/aliases.sh
+source $HOME/.config/commons/aliases.sh
 PATH="$DOTS/scripts:$DOTS/scripts/dmenu:$PATH"
 export PATH
 

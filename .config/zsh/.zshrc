@@ -11,16 +11,8 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/zsh/oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
@@ -48,7 +40,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -115,9 +107,8 @@ bindkey -s '^f' 'ranger^M'
 bindkey -s '^z' 'zi^M'
 bindkey -s '^s' 'ncdu^M'
 
-
 source $HOME/Documents/dotfiles/commons/aliases.sh
-PATH="$DOTS/scripts:$PATH"
+PATH="$DOTS/scripts:$DOTS/scripts/dmenu:$PATH"
 export PATH
 
 # Zoxide related config

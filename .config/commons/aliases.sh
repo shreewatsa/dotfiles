@@ -27,10 +27,11 @@ TMUX_CONFIG="$HOME/.config/tmux/tmux.conf"
 alias lg="lazygit"
 
 # Git bare repo for dotfiles.
-alias config="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
-alias configls="config ls-tree --full-tree -r HEAD --name-only"  # Do not use this => config log --pretty=format: --name-only --diff-filter=A | sort -;  
-alias configtree="configls | tree -C --fromfile . | ${PAGER:-less};"  # View tracked files in a tree.
-alias configopen='nvim $(configls | fzf | sed "s,^,$(config rev-parse --show-toplevel)/,")'  # Open tracked file in nvim.
+alias bare="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+alias barels="bare ls-files --full-name"
+alias barelsl="bare ls-tree --full-tree -r HEAD --name-only"  # Do not use this => bare log --pretty=format: --name-only --diff-filter=A | sort -;  
+alias baretree="barelsl | tree -C --fromfile . | ${PAGER:-less};"  # View tracked files in a tree.
+alias barefind='nvim $(barelsl | fzf | sed "s,^,$(bare rev-parse --show-toplevel)/,")'  # Open tracked file in nvim.
 
 # alias vim="nvim"
 alias notes="calcurse"	# note and appointment taking ncurses based app.
